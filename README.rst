@@ -2,6 +2,8 @@
 pymongo-pubsub — a publish-subscribe pattern implementation for pymongo
 =======================================================================
 
+------
+
 Ever wished you could use your MongoDB to drive an event-driven enviroment?
 
 Now you can.
@@ -12,9 +14,8 @@ end and a *tailable* cursor to catch it as it is inserted on the other.
 The publisher
 =============
 
-A publisher is a piece of code responsible for pumping data into the database:
+A publisher is a piece of code responsible for pumping data into the database: ::
 
-..code:: python
     import pymongo
     from pymongo_pubsub import Publisher
 
@@ -28,9 +29,8 @@ The subscriber
 ==============
 
 A subscriber is a piece of code responsible for processing data as it is pulled
-from the database:
+from the database: ::
 
-..code:: python
     import pymongo
     from pymongo_pubsub import Subscriber
 
