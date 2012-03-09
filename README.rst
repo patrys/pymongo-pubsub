@@ -51,7 +51,7 @@ pass it optional ``max_size`` and ``max_length`` parameters to define storage
 limits of the collection at the time it is created. The default size is
 ``1000000`` bytes and the default length limit is ``None``.
 
-The subscriber will never create any collections in the database and in case
+A ``Subscriber`` will never create any collections in the database and in case
 the collections is missing it will cowardly raise a ``KeyError`` exception.
 This is not a bug. This is to avoid having to synchronize collection limits
 between the publisher and all of the subscribers.
