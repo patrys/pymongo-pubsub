@@ -1,6 +1,6 @@
 import time
 
-VERSION = (2012, 3, 0, 'alpha', 0)
+VERSION = (2012, 3, 0, 'alpha', 1)
 
 def get_version():
     version = '%s.%s' % (VERSION[0], VERSION[1])
