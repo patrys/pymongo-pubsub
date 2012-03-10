@@ -39,7 +39,7 @@ class Publisher(object):
         return collection
 
     def push(self, data):
-        record = {'_id': time.time(), 'payload': data}
+        record = dict(data, _id=time.time())
         self.collection.insert(record)
 
 
@@ -50,14 +50,11 @@ class Subscriber(object):
     iterator = None
 
     def __init__(self, database, collection_name, callback,
-                 since=None, check_interval=1.0):
+                 matching=None, check_interval=1.0):
         self.collection = self.init_collection(database, collection_name)
         self.callback = callback
         self.check_interval = check_interval
-        opts = {}
-        if since:
-            opts['_id'] = {'$gt': since}
-        self.iterator = self.collection.find(opts, tailable=True)
+        self.iterator = self.collection.find(matching, tailable=True)
 
     def init_collection(self, database, collection_name):
         if not collection_name in database.collection_names():
@@ -81,7 +78,7 @@ class Subscriber(object):
         while self.iterator.alive:
             try:
                 record = self.iterator.next()
-                self.callback(record['_id'], record['payload'])
+                self.callback(record)
                 yield True
             except StopIteration:
                 yield False
