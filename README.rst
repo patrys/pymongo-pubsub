@@ -25,6 +25,14 @@ A publisher is a piece of code responsible for pumping data into the database: :
     publisher = Publisher(database, 'test_event')
     publisher.push({'message': 'hello world', 'answer': 42})
 
+A ``Publisher`` will take care of setting up the underlying collection. You can
+pass it optional ``max_size`` and ``max_length`` parameters to define storage
+limits of the collection at the time it is created. The default size is
+``1000000`` bytes and the default length limit is ``None``.
+
+Make sure your queue is big enough to never overflow or you're going to start
+losing data. You care about your data, right?
+
 The subscriber
 ==============
 
@@ -44,18 +52,7 @@ from the database: ::
                             matching={'answer': 42})
     subscriber.listen()
 
-The details
-===========
-
-A ``Publisher`` will take care of setting up the underlying collection. You can
-pass it optional ``max_size`` and ``max_length`` parameters to define storage
-limits of the collection at the time it is created. The default size is
-``1000000`` bytes and the default length limit is ``None``.
-
 A ``Subscriber`` will never create any collections in the database and in case
 the collections is missing it will cowardly raise a ``KeyError`` exception.
 This is not a bug. This is to avoid having to synchronize collection limits
 between the publisher and all of the subscribers.
-
-Make sure your queue is big enough to never overflow or you're going to start
-losing data. You care about your data, right?
