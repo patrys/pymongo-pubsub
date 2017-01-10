@@ -1,7 +1,7 @@
 pymongo-pubsub — a publish-subscribe pattern implementation for pymongo
 =======================================================================
 
-Ever wished you could use your MongoDB to drive an event-driven enviroment?
+Ever wished you could use your MongoDB to drive an event-driven environment?
 
 Now you can.
 
